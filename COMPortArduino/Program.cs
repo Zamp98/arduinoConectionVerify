@@ -9,10 +9,6 @@ namespace ConsoleApp1
         public static void Main()
         {
 
-            //_serialPort = new SerialPort();
-            //_serialPort.PortName = "COM3";//Set your board COM
-            //_serialPort.BaudRate = 9600;
-            //_serialPort.Open();
             String[] portNames = SerialPort.GetPortNames();
             SerialPort porta;
             int frequencia = 9600;
@@ -24,16 +20,6 @@ namespace ConsoleApp1
                     try
                     {
                         porta.Open();
-                        // Talvez algum código para esperar para que o Arduino envie os dados
-
-                        /*
-                            Código do Arduino para enviar a mensagem:
-                            void setup() { 
-                                Serial.begin(9600);
-                                Serial.println("Conexão estabelecida!");
-                            }
-                        */
-                        
                         string message = "Connected!\0";
                         porta.Write(message);
                         Thread.Sleep(2000);
@@ -43,7 +29,6 @@ namespace ConsoleApp1
                         {
                             Console.WriteLine("Arduino encontrado na porta: " + portName);
                             Thread.Sleep(10000);
-                            //break;
                         }
                         else
                         {
@@ -61,18 +46,6 @@ namespace ConsoleApp1
                     Console.WriteLine("Arduino não encontrado!");
                 }
             }
-
-            /*while (true)
-            {
-                string a = _serialPort.ReadExisting();
-                //tem que mandar a string com \0 pro arduino n ficar doido
-                string message = "O GUTO\0";
-                _serialPort.Write(message);
-                Console.WriteLine(a);
-                Thread.Sleep(2000);
-                int s = portNames.Length;
-                
-            }*/
         }
     }
 }
